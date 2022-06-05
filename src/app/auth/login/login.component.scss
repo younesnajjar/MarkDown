@@ -1,0 +1,27 @@
+::ng-deep {
+    .ppassword {
+        position: relative;
+        input {
+            width: 100%;
+            position: relative;
+            padding:1rem;
+        }
+    }
+}
+
+:host ::ng-deep .pi-eye{
+    transform:scale(1.6);
+    margin-right: 1rem;
+    right: 0.75rem;
+    color: var(--primary-color) !important;
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+
+}
+
+:host ::ng-deep .pi-eye-slash{
+    transform:scale(1.6);
+    margin-right: 1rem;
+    color: var(--primary-color) !important;
+}

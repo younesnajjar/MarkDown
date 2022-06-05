@@ -1,0 +1,33 @@
+
+<div class="tab">
+    <input type="checkbox" [(ngModel)]="checked" [id]="item.type + item?.id">
+
+    <label class="tab-label" [for]="item.type + item?.id" (click)="handleItemClick()">
+        <div class="flex w-full">
+            <i class="pi arrow" [ngClass]="{'pi-folder': item.type === 'folder', 'pi-file': item.type === 'file'}"></i>
+            <span>{{item?.name}}</span>
+            <i *ngIf="item.type === 'folder'" class="pi pi-chevron-down arrow" [ngClass]="{'arrow-down': checked}"></i>
+        </div>
+        <i class="pi pi-bars options-button" (click)="$event.preventDefault() || menu.toggle($event)" ></i>
+
+    </label>
+    <i class="ml-3 text-500" *ngIf="item?.type === 'folder'">{{item?.files?.length}} files</i>
+    <i class="ml-3 text-500" *ngIf="item?.type === 'file'">Created At {{item?.createdAt | date: 'hh:mm dd/MM/yyyy'}}</i>
+
+
+    <p-menu #menu [popup]="true" [model]="options"></p-menu>
+
+
+
+    <div class="tab-content" *ngIf="item?.type === 'folder'">
+        <app-menu-item type="file" *ngFor="let file of item?.files" [item]="file"></app-menu-item>
+    </div>
+</div>
+
+
+<p-dialog header="Select a folder" [(visible)]="display" [modal]="true">
+    <select [value]="item.parent" (change)="handleFolderSelection($event)" class="w-100">
+        <option></option>
+        <option *ngFor="let folder of folders" [value]="folder.id">{{folder.name}}</option>
+    </select>
+</p-dialog>

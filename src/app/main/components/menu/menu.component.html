@@ -1,0 +1,20 @@
+<form [formGroup]="searchFg">
+    <div class="flex w-full mb-2">
+        <div class="p-input-icon-right pr-1">
+            <i class="pi pi-search"></i>
+            <input type="text" placeholder="Search for a folder or file" pInputText
+                   formControlName="name"/>
+        </div>
+        <button pButton pRipple type="button" [disabled]="!searchFg.value.name" icon="pi pi-plus" class="p-button-rounded add-button" (click)="menu.toggle($event)"></button>
+        <p-menu #menu [popup]="true" [model]="searchOptions"></p-menu>
+    </div>
+
+<!--    <p-chips [separator]="','" styleClass="block" placeholder="Tags: Tag1, ..." formControlName="tags"></p-chips>-->
+
+</form>
+
+<div class="mt-2">
+    <div class="tabs">
+        <app-menu-item [item]="item" *ngFor="let item of items"></app-menu-item>
+    </div>
+</div>

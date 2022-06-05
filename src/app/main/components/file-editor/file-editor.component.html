@@ -1,0 +1,25 @@
+<form [formGroup]="fileFg" *ngIf="item; else noFile" class="p-3 container flex flex-column">
+    <div class="mb-3 w-full flex align-items-center">
+        <div class="flex-1">
+            <input formControlName="name" type="text" placeholder="File name, Ex: Folder 1, ..." pInputText class="w-full"/>
+        </div>
+        <i class="pi pi-trash text-pink-500 cursor-pointer" (click)="handleDelete()"></i>
+        <i class="pi cursor-pointer" [ngClass]="{'pi-eye': !isPreview, 'pi-eye-slash': isPreview}" (click)="togglePreview()"></i>
+        <i class="pi pi-folder cursor-pointer"></i>
+        <button (click)="submitChanges()" pButton pRipple type="button">Save</button>
+    </div>
+    <div class="w-full mb-3">
+        <p-chips [separator]="','" styleClass="block" placeholder="Tags: Tag1, ..." formControlName="tags"></p-chips>
+    </div>
+    <div class="flex-1 flex flex-column">
+        <textarea *ngIf="!isPreview" formControlName="content" placeholder="Hello World ...." pInputTextarea class="w-full h-full flex-1" ></textarea>
+
+        <markdown style="white-space: pre-wrap" *ngIf="isPreview" class="card w-full h-full flex-1 p-2">
+            {{this.fileFg.value.content}}
+        </markdown>
+    </div>
+</form>
+<ng-template #noFile>
+    <div class="card text-center m-3">No file is selected</div>
+</ng-template>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
