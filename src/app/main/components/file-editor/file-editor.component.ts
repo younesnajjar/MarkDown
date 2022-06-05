@@ -4,6 +4,8 @@ import {ListItem} from "../../../shared/models/list-item.model";
 import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 import {ConfirmationService} from "primeng/api";
 
+export const PREVIEW_REF = 'preview_ref';
+
 @Component({
     selector: 'app-file-editor',
     templateUrl: './file-editor.component.html',
@@ -25,6 +27,7 @@ export class FileEditorComponent implements OnInit {
             this.item = item;
             this.setFileData();
         });
+        this.isPreview =  JSON.parse(localStorage.getItem(PREVIEW_REF));
 
     }
 
@@ -61,5 +64,6 @@ export class FileEditorComponent implements OnInit {
 
     togglePreview() {
         this.isPreview = !this.isPreview;
+        localStorage.setItem(PREVIEW_REF, JSON.stringify(this.isPreview));
     }
 }
